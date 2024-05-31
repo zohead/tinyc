@@ -17,6 +17,7 @@
 typedef struct cli_t {
 	bool help;
 	bool debug;
+	bool disable_cgroups;
 	bool privileged;
 	bool userns_remap;
 	char* rootfs;
@@ -59,6 +60,12 @@ static const tc_cli_flag_t TC_FLAG_DEBUG = {
 	.description = "enables debug message",
 };
 
+static const tc_cli_flag_t TC_FLAG_DISABLE_CGROUPS = {
+	.name = "--disable-cgroups",
+	.name_len = strlen("--disable-cgroups"),
+	.description = "disables cgroups",
+};
+
 static const tc_cli_flag_t TC_FLAG_USERNS_REMAP = {
 	.name = "--userns-remap",
 	.name_len = strlen("--userns-remap"),
@@ -88,6 +95,7 @@ static const tc_cli_flag_t TC_FLAG_ENV = {
  */
 static const tc_cli_flag_t* tc_cli_flags[] = { &TC_FLAG_HELP,
 	                                       &TC_FLAG_DEBUG,
+	                                       &TC_FLAG_DISABLE_CGROUPS,
 	                                       &TC_FLAG_ROOTFS,
 	                                       &TC_FLAG_USERNS_REMAP,
 	                                       &TC_FLAG_ENV,
