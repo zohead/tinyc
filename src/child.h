@@ -6,7 +6,9 @@
 #include <errno.h>
 #include <grp.h>
 #include <libgen.h>
+#ifdef SUPPORT_SECCOMP
 #include <seccomp.h>
+#endif
 #include <stdlib.h>
 #include <string.h>
 #include <sys/capability.h>
@@ -49,6 +51,7 @@ static const size_t tc_child_dropped_capabilities_len =
   sizeof(tc_child_dropped_capabilities) /
   sizeof(*tc_child_dropped_capabilities);
 
+#ifdef SUPPORT_SECCOMP
 typedef struct child_seccomp_mas {
 	uint32_t action;
 	int syscall;
@@ -120,6 +123,7 @@ static const tc_child_seccomp_mask tc_child_seccomp_masks[] = {
 
 static const size_t tc_child_seccomp_masks_len =
   sizeof(tc_child_seccomp_masks) / sizeof(*tc_child_seccomp_masks);
+#endif
 
 int
 tc_child_mounts(tc_proc_t* config);

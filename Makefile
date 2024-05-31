@@ -1,5 +1,5 @@
 CC 				?=	clang
-LIBS 			:=	-static -lcap -lseccomp
+LIBS 			:=	-static -lcap
 DEFS 			:=  -DDEBUG
 INCLUDES		:=	-I/usr/include
 BIN 			:=	tinyc
@@ -7,6 +7,11 @@ LIB 			:=	./src/libtinyc.a
 SOURCE_BIN 		:=	./src/main.c
 BUILD 			:=	debug
 CFLAGS 			:=	-std=gnu99 -Wall -O2
+
+ifdef SUPPORT_SECCOMP
+CFLAGS += -DSUPPORT_SECCOMP
+LIBS += -lseccomp
+endif
 
 SRCS 			:=	$(shell find ./src/ -name '*.c')
 LIB_OBJS 		:=	$(patsubst %.c, %.o, $(filter-out $(SOURCE_BIN), $(SRCS)))

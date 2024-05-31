@@ -29,11 +29,13 @@ tc_child_main(void* arg)
 		  !tc_child_capabilities(), abort, "couldn't set capabilities");
 	}
 
+#ifdef SUPPORT_SECCOMP
 	if (proc->disable_seccomp == false) {
 		_TC_MUST_GO(!tc_child_block_syscalls(),
 		            abort,
 		            "couldn't block syscalls via seccomp");
 	}
+#endif
 
 	_TC_MUST_P_GO(!close(proc->parent_ipc_socket),
 	              "close",
@@ -57,6 +59,7 @@ abort:
 	return 1;
 }
 
+#ifdef SUPPORT_SECCOMP
 int
 tc_child_block_syscalls()
 {
@@ -99,6 +102,7 @@ abort:
 
 	return 1;
 }
+#endif
 
 int
 tc_child_mount_procfs()
