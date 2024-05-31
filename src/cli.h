@@ -18,6 +18,11 @@ typedef struct cli_t {
 	bool help;
 	bool debug;
 	bool disable_cgroups;
+	bool disable_mount;
+	bool disable_pid;
+	bool disable_ipc;
+	bool disable_net;
+	bool disable_uts;
 	bool privileged;
 	bool userns_remap;
 	char* rootfs;
@@ -66,6 +71,36 @@ static const tc_cli_flag_t TC_FLAG_DISABLE_CGROUPS = {
 	.description = "disables cgroups",
 };
 
+static const tc_cli_flag_t TC_FLAG_DISABLE_MOUNT = {
+	.name = "--disable-mount",
+	.name_len = strlen("--disable-mount"),
+	.description = "disables new mount namespace",
+};
+
+static const tc_cli_flag_t TC_FLAG_DISABLE_PID = {
+	.name = "--disable-pid",
+	.name_len = strlen("--disable-pid"),
+	.description = "disables new PID namespace",
+};
+
+static const tc_cli_flag_t TC_FLAG_DISABLE_IPC = {
+	.name = "--disable-ipc",
+	.name_len = strlen("--disable-ipc"),
+	.description = "disables new IPC namespace",
+};
+
+static const tc_cli_flag_t TC_FLAG_DISABLE_NET = {
+	.name = "--disable-net",
+	.name_len = strlen("--disable-net"),
+	.description = "disables new network namespace",
+};
+
+static const tc_cli_flag_t TC_FLAG_DISABLE_UTS = {
+	.name = "--disable-uts",
+	.name_len = strlen("--disable-uts"),
+	.description = "disables new UTS namespace",
+};
+
 static const tc_cli_flag_t TC_FLAG_USERNS_REMAP = {
 	.name = "--userns-remap",
 	.name_len = strlen("--userns-remap"),
@@ -96,6 +131,11 @@ static const tc_cli_flag_t TC_FLAG_ENV = {
 static const tc_cli_flag_t* tc_cli_flags[] = { &TC_FLAG_HELP,
 	                                       &TC_FLAG_DEBUG,
 	                                       &TC_FLAG_DISABLE_CGROUPS,
+	                                       &TC_FLAG_DISABLE_MOUNT,
+	                                       &TC_FLAG_DISABLE_PID,
+	                                       &TC_FLAG_DISABLE_IPC,
+	                                       &TC_FLAG_DISABLE_NET,
+	                                       &TC_FLAG_DISABLE_UTS,
 	                                       &TC_FLAG_ROOTFS,
 	                                       &TC_FLAG_USERNS_REMAP,
 	                                       &TC_FLAG_ENV,

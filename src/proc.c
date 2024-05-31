@@ -252,6 +252,21 @@ tc_proc_run(tc_proc_t* proc, int (*child_fn)(void*))
 	if (proc->disable_cgroups)
 		flags &= ~CLONE_NEWCGROUP;
 
+	if (proc->disable_mount)
+		flags &= ~CLONE_NEWNS;
+
+	if (proc->disable_pid)
+		flags &= ~CLONE_NEWPID;
+
+	if (proc->disable_ipc)
+		flags &= ~CLONE_NEWIPC;
+
+	if (proc->disable_net)
+		flags &= ~CLONE_NEWNET;
+
+	if (proc->disable_uts)
+		flags &= ~CLONE_NEWUTS;
+
 	_TC_MUST_P_GO(
 	  (proc->child_pid = clone(child_fn,
 	                           proc->stack + TC_DEFAULT_STACK_SIZE,

@@ -46,6 +46,11 @@ main(int argc, char** argv)
 	proc.argc = cli.argc;
 	proc.enable_debug = cli.debug;
 	proc.disable_cgroups = cli.disable_cgroups;
+	proc.disable_mount = cli.disable_mount;
+	proc.disable_pid = cli.disable_pid;
+	proc.disable_ipc = cli.disable_ipc;
+	proc.disable_net = cli.disable_net;
+	proc.disable_uts = cli.disable_uts;
 	proc.disable_seccomp = cli.privileged;
 	proc.disable_capabilities = cli.privileged;
 	proc.disable_userns_remap = cli.userns_remap == false;

@@ -46,6 +46,31 @@ tc_cli_parse(tc_cli_t* cli, int argc, char** argv)
 			continue;
 		}
 
+		if (!strcmp(current_arg, TC_FLAG_DISABLE_MOUNT.name)) {
+			cli->disable_mount = true;
+			continue;
+		}
+
+		if (!strcmp(current_arg, TC_FLAG_DISABLE_PID.name)) {
+			cli->disable_pid = true;
+			continue;
+		}
+
+		if (!strcmp(current_arg, TC_FLAG_DISABLE_IPC.name)) {
+			cli->disable_ipc = true;
+			continue;
+		}
+
+		if (!strcmp(current_arg, TC_FLAG_DISABLE_NET.name)) {
+			cli->disable_net = true;
+			continue;
+		}
+
+		if (!strcmp(current_arg, TC_FLAG_DISABLE_UTS.name)) {
+			cli->disable_uts = true;
+			continue;
+		}
+
 		if (!strcmp(current_arg, TC_FLAG_PRIVILEGED.name)) {
 			cli->privileged = true;
 			continue;

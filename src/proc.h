@@ -51,6 +51,16 @@ typedef struct proc_t {
 	// disable cgroups
 	bool disable_cgroups;
 
+	bool disable_mount;
+
+	bool disable_pid;
+
+	bool disable_ipc;
+
+	bool disable_net;
+
+	bool disable_uts;
+
 	// user id (userns-remap).
 	uid_t uid;
 
