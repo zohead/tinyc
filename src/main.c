@@ -44,6 +44,7 @@ main(int argc, char** argv)
 	proc.envpc = cli.envc;
 	proc.argv = cli.argv;
 	proc.argc = cli.argc;
+	proc.enable_debug = cli.debug;
 	proc.disable_userns_remap = cli.userns_remap == false;
 
 #ifdef RAND_HOSTNAME
@@ -51,7 +52,8 @@ main(int argc, char** argv)
 	//      start.
 	tc_names_fill(proc.hostname, 255);
 #endif
-	tc_proc_show(&proc);
+	if (proc.enable_debug)
+		tc_proc_show(&proc);
 
 	err = tc_proc_init(&proc);
 	if (err) {

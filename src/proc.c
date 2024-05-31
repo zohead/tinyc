@@ -84,10 +84,12 @@ tc_proc_set_cgroups(tc_proc_t* proc)
 	tc_proc_cgroup_setting** setting;
 	tc_proc_cgroup const** cgrp = tc_proc_cgroups;
 
-	_TC_INFO("configuring cgroups");
+	if (proc->enable_debug)
+		_TC_INFO("configuring cgroups");
 
 	for (; *cgrp; cgrp++) {
-		_TC_INFO("[cgroups] configuring %s", (*cgrp)->subsystem);
+		if (proc->enable_debug)
+			_TC_INFO("[cgroups] configuring %s", (*cgrp)->subsystem);
 
 		// TODO separate this into a function
 		if (snprintf(dir,
@@ -104,8 +106,9 @@ tc_proc_set_cgroups(tc_proc_t* proc)
 		}
 
 		for (setting = (*cgrp)->settings; *setting; setting++) {
-			_TC_INFO("[cgroups] configuring property %s",
-			         (*setting)->name);
+			if (proc->enable_debug)
+				_TC_INFO("[cgroups] configuring property %s",
+				         (*setting)->name);
 
 			// TODO separate this into a function
 			if (snprintf(path,
@@ -152,7 +155,8 @@ tc_proc_clean_cgroups(tc_proc_t* proc)
 	char task[PATH_MAX] = { 0 };
 	int task_fd = 0;
 
-	_TC_INFO("cleaning cgroups");
+	if (proc->enable_debug)
+		_TC_INFO("cleaning cgroups");
 
 	for (; *cgrp; cgrp++) {
 		if (snprintf(dir,
@@ -240,7 +244,8 @@ tc_proc_run(tc_proc_t* proc, int (*child_fn)(void*))
 {
 	_TC_DEBUG("starting to run process");
 
-	tc_proc_show(proc);
+	if (proc->enable_debug)
+		tc_proc_show(proc);
 
 	_TC_MUST_P_GO(
 	  (proc->child_pid = clone(child_fn,

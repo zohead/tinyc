@@ -37,6 +37,8 @@
  *      of the container.
  */
 typedef struct proc_t {
+	bool enable_debug;
+
 	// disables syscall filtering.
 	bool disable_seccomp;
 

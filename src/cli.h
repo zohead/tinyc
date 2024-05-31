@@ -16,6 +16,7 @@
  */
 typedef struct cli_t {
 	bool help;
+	bool debug;
 	bool privileged;
 	bool userns_remap;
 	char* rootfs;
@@ -52,6 +53,12 @@ static const tc_cli_flag_t TC_FLAG_HELP = {
 	.description = "shows this help message",
 };
 
+static const tc_cli_flag_t TC_FLAG_DEBUG = {
+	.name = "--debug",
+	.name_len = strlen("--debug"),
+	.description = "enables debug message",
+};
+
 static const tc_cli_flag_t TC_FLAG_USERNS_REMAP = {
 	.name = "--userns-remap",
 	.name_len = strlen("--userns-remap"),
@@ -80,6 +87,7 @@ static const tc_cli_flag_t TC_FLAG_ENV = {
  *      Available flags to retrieve values from the 'cli'.
  */
 static const tc_cli_flag_t* tc_cli_flags[] = { &TC_FLAG_HELP,
+	                                       &TC_FLAG_DEBUG,
 	                                       &TC_FLAG_ROOTFS,
 	                                       &TC_FLAG_USERNS_REMAP,
 	                                       &TC_FLAG_ENV,
