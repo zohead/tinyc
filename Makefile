@@ -1,4 +1,4 @@
-CC 				?=	clang
+CC 			?=	clang
 LIBS 			:=	-static -lcap
 DEFS 			:=  -DDEBUG
 INCLUDES		:=	-I/usr/include
@@ -13,7 +13,13 @@ CFLAGS += -DSUPPORT_SECCOMP
 LIBS += -lseccomp
 endif
 
-SRCS 			:=	$(shell find ./src/ -name '*.c')
+SRCS 			:=	src/proc.c src/child.c src/cli.c src/main.c
+
+ifdef RAND_HOSTNAME
+CFLAGS += -DRAND_HOSTNAME
+SRCS += src/names.c
+endif
+
 LIB_OBJS 		:=	$(patsubst %.c, %.o, $(filter-out $(SOURCE_BIN), $(SRCS)))
 TESTS 			:=	$(shell find ./test/ -name '*.c')
 TESTS_BINS		:=	$(patsubst %.c, %.out, $(filter-out $(SOURCE_BIN), $(TESTS)))

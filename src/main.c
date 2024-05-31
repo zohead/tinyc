@@ -4,13 +4,17 @@
 #include "./child.h"
 #include "./cli.h"
 #include "./common.h"
+#ifdef RAND_HOSTNAME
 #include "./names.h"
+#endif
 #include "./proc.h"
 
 int
 main(int argc, char** argv)
 {
+#ifdef RAND_HOSTNAME
 	struct timeval time;
+#endif
 	tc_cli_t cli = { 0 };
 	tc_proc_t proc = { 0 };
 	int err = 0;
@@ -30,19 +34,23 @@ main(int argc, char** argv)
 		exit(0);
 	}
 
+#ifdef RAND_HOSTNAME
 	// CC:  initialize the seed for our random choice of
 	//      container name
 	gettimeofday(&time, NULL);
 	srand((time.tv_sec * 1000) + (time.tv_usec / 1000));
+#endif
 
 	proc.envpc = cli.envc;
 	proc.argv = cli.argv;
 	proc.argc = cli.argc;
 	proc.disable_userns_remap = cli.userns_remap == false;
 
+#ifdef RAND_HOSTNAME
 	// CC:  fill the hostname of the process that we'll
 	//      start.
 	tc_names_fill(proc.hostname, 255);
+#endif
 	tc_proc_show(&proc);
 
 	err = tc_proc_init(&proc);
