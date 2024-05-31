@@ -242,15 +242,20 @@ tc_proc_dir_exists(char* dir)
 int
 tc_proc_run(tc_proc_t* proc, int (*child_fn)(void*))
 {
+	int flags = tc_proc_flags | SIGCHLD;
+
 	_TC_DEBUG("starting to run process");
 
 	if (proc->enable_debug)
 		tc_proc_show(proc);
 
+	if (proc->disable_cgroups)
+		flags &= ~CLONE_NEWCGROUP;
+
 	_TC_MUST_P_GO(
 	  (proc->child_pid = clone(child_fn,
 	                           proc->stack + TC_DEFAULT_STACK_SIZE,
-	                           tc_proc_flags | SIGCHLD,
+	                           flags,
 	                           proc)) != -1,
 	  "clone",
 	  abort,
