@@ -242,6 +242,10 @@ tc_child_mounts(tc_proc_t* proc)
 		return -1;
 	}
 
+	char tmp_dir[sizeof(inner_mount_dir)];
+	snprintf(tmp_dir, sizeof(tmp_dir), "%s%s", old_root, mount_dir);
+	rmdir(tmp_dir);
+
 	if (umount2(old_root, MNT_DETACH)) {
 		fprintf(stderr, "umount failed! %m\n");
 		return -1;
