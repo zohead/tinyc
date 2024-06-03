@@ -46,6 +46,7 @@ main(int argc, char** argv)
 	proc.parent_ipc_socket = proc.child_ipc_socket = -1;
 	proc.argv = cli.argv;
 	proc.argc = cli.argc;
+	proc.rootfs = cli.rootfs;
 	proc.enable_debug = cli.debug;
 	proc.disable_cgroups = cli.disable_cgroups;
 	proc.disable_mount = cli.disable_mount;
