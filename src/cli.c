@@ -93,7 +93,7 @@ tc_cli_parse(tc_cli_t* cli, int argc, char** argv)
 	}
 
 	if (envc > 0) {
-		cli->envp = malloc(sizeof(*cli->envp) * envc);
+		cli->envp = malloc(sizeof(*cli->envp) * (envc + 1));
 		if (cli->envp == NULL) {
 			return 1;
 		}
@@ -102,6 +102,7 @@ tc_cli_parse(tc_cli_t* cli, int argc, char** argv)
 		for (int i = 0; i < envc; i++) {
 			cli->envp[i] = env[i];
 		}
+		cli->envp[envc] = NULL;
 	}
 
 	cli->argc = argc - ndx;
