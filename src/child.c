@@ -45,7 +45,7 @@ tc_child_main(void* arg)
 
 	_TC_DEBUG("[child] starting execution of process %s", proc->argv[0]);
 
-	_TC_MUST_P_GO(!execve(proc->argv[0], proc->argv, NULL),
+	_TC_MUST_P_GO(!execve(proc->argv[0], proc->argv, proc->envp),
 	              "execve",
 	              abort,
 	              "couldn't execute process %s",

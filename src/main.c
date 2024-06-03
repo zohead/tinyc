@@ -42,6 +42,7 @@ main(int argc, char** argv)
 #endif
 
 	proc.envpc = cli.envc;
+	proc.envp = cli.envp;
 	proc.argv = cli.argv;
 	proc.argc = cli.argc;
 	proc.enable_debug = cli.debug;
