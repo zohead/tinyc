@@ -233,10 +233,8 @@ tc_child_mounts(tc_proc_t* proc)
 	              mount_dir,
 	              inner_mount_dir);
 
-	char* old_root_dir = basename(inner_mount_dir);
-	char old_root[sizeof(inner_mount_dir) + 1] = { "/" };
+	char *old_root = inner_mount_dir + sizeof(mount_dir) - 1;
 
-	strcpy(&old_root[1], old_root_dir);
 	_TC_DEBUG("[child] unmounting old root (old_root=%s)", old_root);
 
 	if (chdir("/")) {
@@ -254,7 +252,8 @@ tc_child_mounts(tc_proc_t* proc)
 		return -1;
 	}
 
-	fprintf(stderr, "done.\n");
+	if (proc->enable_debug)
+		fprintf(stderr, "done.\n");
 	return 0;
 
 abort:
