@@ -5,11 +5,13 @@ tc_child_main(void* arg)
 {
 	tc_proc_t* proc = arg;
 
+#ifdef RAND_HOSTNAME
 	_TC_MUST_P_GO(!sethostname(proc->hostname, strlen(proc->hostname)),
 	              "sethostname",
 	              abort,
 	              "couldn't set hostname to %s",
 	              proc->hostname);
+#endif
 
 	if (proc->rootfs && strlen(proc->rootfs) > 0) {
 		_TC_MUST_GO(
