@@ -43,6 +43,7 @@ main(int argc, char** argv)
 
 	proc.envpc = cli.envc;
 	proc.envp = cli.envp;
+	proc.parent_ipc_socket = proc.child_ipc_socket = -1;
 	proc.argv = cli.argv;
 	proc.argc = cli.argc;
 	proc.enable_debug = cli.debug;

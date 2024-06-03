@@ -39,11 +39,13 @@ tc_child_main(void* arg)
 	}
 #endif
 
-	_TC_MUST_P_GO(!close(proc->parent_ipc_socket),
-	              "close",
-	              abort,
-	              "couldn't close parent fd %d",
-	              proc->parent_ipc_socket);
+	if (proc->parent_ipc_socket >= 0) {
+		_TC_MUST_P_GO(!close(proc->parent_ipc_socket),
+			      "close",
+			      abort,
+			      "couldn't close parent fd %d",
+			      proc->parent_ipc_socket);
+	}
 
 	_TC_DEBUG("[child] starting execution of process %s", proc->argv[0]);
 

@@ -312,12 +312,12 @@ tc_proc_cleanup(tc_proc_t* proc)
 		proc->stack = NULL;
 	}
 
-	if (proc->parent_ipc_socket > 0) {
+	if (proc->parent_ipc_socket >= 0) {
 		close(proc->parent_ipc_socket);
 		proc->parent_ipc_socket = -1;
 	}
 
-	if (proc->child_ipc_socket > 0) {
+	if (proc->child_ipc_socket >= 0) {
 		close(proc->child_ipc_socket);
 		proc->child_ipc_socket = -1;
 	}
