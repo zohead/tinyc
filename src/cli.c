@@ -91,6 +91,16 @@ tc_cli_parse(tc_cli_t* cli, int argc, char** argv)
 			continue;
 		}
 
+		if (strstr(current_arg, TC_FLAG_READONLY.name)) {
+			cli->readonly = true;
+			continue;
+		}
+
+		if (strstr(current_arg, TC_FLAG_OLD_ROOTFS.name)) {
+			cli->old_rootfs = current_arg + TC_FLAG_OLD_ROOTFS.name_len + 1;
+			continue;
+		}
+
 		if (strstr(current_arg, TC_FLAG_ENV.name)) {
 			env[envc++] = current_arg + TC_FLAG_ENV.name_len + 1;
 			continue;

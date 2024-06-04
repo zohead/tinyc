@@ -27,6 +27,8 @@ typedef struct cli_t {
 	bool privileged;
 	bool userns_remap;
 	char* rootfs;
+	bool readonly;
+	char *old_rootfs;
 	char** argv;
 	int argc;
 	char** envp;
@@ -126,6 +128,18 @@ static const tc_cli_flag_t TC_FLAG_ROOTFS = {
 	.description = "absolute path to a rootfs",
 };
 
+static const tc_cli_flag_t TC_FLAG_READONLY = {
+	.name = "--readonly",
+	.name_len = strlen("--readonly"),
+	.description = "mount rootfs as readonly",
+};
+
+static const tc_cli_flag_t TC_FLAG_OLD_ROOTFS = {
+	.name = "--old-rootfs",
+	.name_len = strlen("--old-rootfs"),
+	.description = "absolute path in rootfs to mount old rootfs",
+};
+
 static const tc_cli_flag_t TC_FLAG_ENV = {
 	.name = "--env",
 	.name_len = strlen("--env"),
@@ -145,6 +159,8 @@ static const tc_cli_flag_t* tc_cli_flags[] = { &TC_FLAG_HELP,
 	                                       &TC_FLAG_DISABLE_UTS,
 	                                       &TC_FLAG_DISABLE_PROC,
 	                                       &TC_FLAG_ROOTFS,
+	                                       &TC_FLAG_READONLY,
+	                                       &TC_FLAG_OLD_ROOTFS,
 	                                       &TC_FLAG_USERNS_REMAP,
 	                                       &TC_FLAG_ENV,
 	                                       &TC_FLAG_PRIVILEGED };

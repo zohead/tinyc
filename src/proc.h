@@ -92,6 +92,10 @@ typedef struct proc_t {
 	// as the '/'.
 	char* rootfs;
 
+	bool readonly;
+
+	char *old_rootfs;
+
 	// child_pid holds the pid of the child that
 	// has been created.
 	pid_t child_pid;

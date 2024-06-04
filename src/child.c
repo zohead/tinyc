@@ -248,6 +248,9 @@ tc_child_mounts(tc_proc_t* proc)
 	snprintf(tmp_dir, sizeof(tmp_dir), "%s%s", old_root, mount_dir);
 	rmdir(tmp_dir);
 
+	if (proc->old_rootfs && proc->old_rootfs[0])
+		mount(old_root, proc->old_rootfs, NULL, MS_BIND | MS_PRIVATE, NULL);
+
 	if (umount2(old_root, MNT_DETACH)) {
 		fprintf(stderr, "umount failed! %m\n");
 		return -1;
@@ -257,6 +260,9 @@ tc_child_mounts(tc_proc_t* proc)
 		fprintf(stderr, "rmdir failed! %m\n");
 		return -1;
 	}
+
+	if (proc->readonly)
+		mount(NULL, "/", NULL, MS_REMOUNT | MS_BIND | MS_RDONLY, NULL);
 
 	if (proc->enable_debug)
 		fprintf(stderr, "done.\n");

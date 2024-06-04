@@ -47,6 +47,8 @@ main(int argc, char** argv)
 	proc.argv = cli.argv;
 	proc.argc = cli.argc;
 	proc.rootfs = cli.rootfs;
+	proc.readonly = cli.readonly;
+	proc.old_rootfs = cli.old_rootfs;
 	proc.enable_debug = cli.debug;
 	proc.disable_cgroups = cli.disable_cgroups;
 	proc.disable_mount = cli.disable_mount;
