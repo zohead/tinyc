@@ -23,6 +23,7 @@ typedef struct cli_t {
 	bool disable_ipc;
 	bool disable_net;
 	bool disable_uts;
+	bool disable_proc;
 	bool privileged;
 	bool userns_remap;
 	char* rootfs;
@@ -101,6 +102,12 @@ static const tc_cli_flag_t TC_FLAG_DISABLE_UTS = {
 	.description = "disables new UTS namespace",
 };
 
+static const tc_cli_flag_t TC_FLAG_DISABLE_PROC = {
+	.name = "--disable-proc",
+	.name_len = strlen("--disable-proc"),
+	.description = "disables /proc mount",
+};
+
 static const tc_cli_flag_t TC_FLAG_USERNS_REMAP = {
 	.name = "--userns-remap",
 	.name_len = strlen("--userns-remap"),
@@ -136,6 +143,7 @@ static const tc_cli_flag_t* tc_cli_flags[] = { &TC_FLAG_HELP,
 	                                       &TC_FLAG_DISABLE_IPC,
 	                                       &TC_FLAG_DISABLE_NET,
 	                                       &TC_FLAG_DISABLE_UTS,
+	                                       &TC_FLAG_DISABLE_PROC,
 	                                       &TC_FLAG_ROOTFS,
 	                                       &TC_FLAG_USERNS_REMAP,
 	                                       &TC_FLAG_ENV,

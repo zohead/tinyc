@@ -17,8 +17,10 @@ tc_child_main(void* arg)
 		_TC_MUST_GO(
 		  !tc_child_mounts(proc), abort, "couldn't set child mounts");
 
-		_TC_MUST_GO(
-		  !tc_child_mount_procfs(), abort, "couldn't mount procfs");
+		if (proc->disable_proc == false) {
+			_TC_MUST_GO(
+			  !tc_child_mount_procfs(), abort, "couldn't mount procfs");
+		}
 	}
 
 	if (proc->disable_userns_remap == false) {

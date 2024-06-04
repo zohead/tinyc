@@ -71,6 +71,11 @@ tc_cli_parse(tc_cli_t* cli, int argc, char** argv)
 			continue;
 		}
 
+		if (!strcmp(current_arg, TC_FLAG_DISABLE_PROC.name)) {
+			cli->disable_proc = true;
+			continue;
+		}
+
 		if (!strcmp(current_arg, TC_FLAG_PRIVILEGED.name)) {
 			cli->privileged = true;
 			continue;

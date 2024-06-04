@@ -61,6 +61,8 @@ typedef struct proc_t {
 
 	bool disable_uts;
 
+	bool disable_proc;
+
 	// user id (userns-remap).
 	uid_t uid;
 

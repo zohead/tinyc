@@ -54,6 +54,7 @@ main(int argc, char** argv)
 	proc.disable_ipc = cli.disable_ipc;
 	proc.disable_net = cli.disable_net;
 	proc.disable_uts = cli.disable_uts;
+	proc.disable_proc = cli.disable_proc;
 	proc.disable_seccomp = cli.privileged;
 	proc.disable_capabilities = cli.privileged;
 	proc.disable_userns_remap = cli.userns_remap == false;
